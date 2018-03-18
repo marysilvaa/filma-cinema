@@ -5,35 +5,56 @@
  */
 package Dao;
 
-import Model.bean.Entidade;
-
+import Model.bean.Filme;
+import connection.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
- *
+ *FilmeDao é a implementação do Dao.
  * @author mariane
  */
-public class FilmeDao implements DAO {
-
-    @Override
-    public void cadastrar(Entidade entidade) {
-            
+public class FilmeDao {
+    private Connection con;
+    
+    /**
+     * Automaticamente vai gerar uma conexão com o FilmeDAo.
+     * @param con.
+     */
+    public FilmeDao(){
+        this.con = new ConnectionFactory().getConnection();
+                
     }
-
-    @Override
-    public void excluir(Entidade entidade) {
+    /**
+     * Vai inserir os valores da tabela Filme.
+     */
+    public boolean add(Filme f){
+        String sql = "INSERT INTO Filme(nomefilme, duracao, genero, classificacao) VALUES(?,?,?,?); ";
         
-    }
-
-    @Override
-    public List<Entidade> consultarTodos() {
+    /**
+     * Pega a String e ler, quando ele achar os pontos de interrogação e vai marcar quantos pontos de interrogação tem.
+     * retorna true.
+     */  
     
-    }
-
-    @Override
-    public Entidade consultar(int id) {
-    
-    }
-}
-    
-    
-    
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, f.getNomefilme());
+            stmt.setString(2, f.getDuracao());
+            stmt.setString(3, f.getGenero());
+            stmt.setString(4, f.getClassificacao());
+            stmt.execute();
+            return true;
+            
+    /**
+     * Caso dê um erro no execute ele vem pro catch.
+     * retorna false.
+     */        
+            
+        } catch (SQLException ex) {  
+            Logger.getLogger(FilmeDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }  
+  }
 }

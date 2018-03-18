@@ -1,12 +1,7 @@
 package Testes;
 
 import Dao.SessaoDao;
-import Model.bean.Filme;
-import Model.bean.Sala;
 import Model.bean.Sessao;
-
-
-
 
 
 /**
@@ -15,27 +10,27 @@ import Model.bean.Sessao;
  */
 public class Testejava {
 
-    /**
+    /**Esse é um teste de inserir as coisas no banco de dados.
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        Filme f = new Filme();
-        Sala sa = new Sala();
-        Sessao se = new Sessao();
-        se.setHorario("21:00");
-        se.setNomefilme(f);
-        se.setNum(sa);
-        se.setDatasessao("16/03/2018");
+         Sessao se = new Sessao();
+         se.setHorario("03:10");
+         se.setIdfilme(2);
+         se.setIdsala(3);
+         se.setDatasessao("15/09/2018");
+         
+         
         
-        
-        
-        SessaoDao dao  = new SessaoDao();
-        dao.add(se);
-        
-        
-        
+         SessaoDao dao  = new SessaoDao();
+         if (dao.add(se)){
+             System.out.println("Cadastrado");
+         }else{ 
+             System.out.println("Não Cadastrado");
+         }
+             
+         }
+         
         
     }
-    
-}

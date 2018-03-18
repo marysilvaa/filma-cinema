@@ -11,8 +11,7 @@ import java.sql.SQLException;
  * and open the template in the editor.
  */
 
-/**
- *
+/** É responsavél por fazer uma única conexão que se liga com o banco de dados.
  * @author mariane
  */
 
